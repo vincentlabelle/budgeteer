@@ -1,0 +1,8 @@
+# IDE
+.vscode/
+
+# Byte-compiled
+__pycache__/
+
+# Coverage
+/.coverage
