@@ -37,21 +37,25 @@ class Money:
         return self._value == other._value
 
     def __lt__(self, other: Any) -> bool:
+        # raises TypeError if other is not Money
         if not isinstance(other, self.__class__):
             return NotImplemented
         return self._value < other._value
 
     def __le__(self, other: Any) -> bool:
+        # raises TypeError if other is not Money
         if not isinstance(other, self.__class__):
             return NotImplemented
         return self._value <= other._value
 
     def __gt__(self, other: Any) -> bool:
+        # raises TypeError if other is not Money
         if not isinstance(other, self.__class__):
             return NotImplemented
         return self._value > other._value
 
     def __ge__(self, other: Any) -> bool:
+        # raises TypeError if other is not Money
         if not isinstance(other, self.__class__):
             return NotImplemented
         return self._value >= other._value
