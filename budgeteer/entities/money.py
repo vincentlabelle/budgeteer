@@ -1,5 +1,7 @@
 from decimal import Decimal
-from typing import Any, Tuple
+from typing import Any, Tuple, TypeVar
+
+M = TypeVar("M", bound="Money")
 
 
 class Money:
@@ -15,6 +17,7 @@ class Money:
 
     def __init__(self, cents: int) -> None:
         self._value = self._convert(cents)
+        self._value_in_cents = cents
 
     def _convert(self, cents: int) -> Decimal:
         return Decimal(
@@ -30,6 +33,18 @@ class Money:
 
     def _get_digits(self, cents: int) -> Tuple[int, ...]:
         return tuple(int(d) for d in str(abs(cents)))
+
+    def __add__(self: M, other: Any) -> M:
+        # raises TypeError if other is not Money
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__class__(self._value_in_cents + other._value_in_cents)
+
+    def __sub__(self: M, other: Any) -> M:
+        # raises TypeError if other is not Money
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self.__class__(self._value_in_cents - other._value_in_cents)
 
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, self.__class__):

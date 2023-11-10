@@ -124,3 +124,21 @@ class TestMoneyInequalities:
     def test_ge_when_different_type(self, money: Money) -> None:
         with pytest.raises(TypeError):
             money >= "a"
+
+
+class TestMoneyArithmetic:
+    def test_add(self, money: Money, cents: int) -> None:
+        other = Money(cents + 1)
+        assert money + other == Money(2 * cents + 1)
+
+    def test_add_when_different_type(self, money: Money) -> None:
+        with pytest.raises(TypeError):
+            money + "a"
+
+    def test_sub(self, money: Money, cents: int) -> None:
+        other = Money(cents + 1)
+        assert money - other == Money(-1)
+
+    def test_sub_when_different_type(self, money: Money) -> None:
+        with pytest.raises(TypeError):
+            money - "a"
