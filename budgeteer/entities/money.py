@@ -36,6 +36,26 @@ class Money:
             return NotImplemented
         return self._value == other._value
 
+    def __lt__(self, other: Any) -> bool:
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self._value < other._value
+
+    def __le__(self, other: Any) -> bool:
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self._value <= other._value
+
+    def __gt__(self, other: Any) -> bool:
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self._value > other._value
+
+    def __ge__(self, other: Any) -> bool:
+        if not isinstance(other, self.__class__):
+            return NotImplemented
+        return self._value >= other._value
+
     def __hash__(self) -> int:
         return hash(self._value)
 

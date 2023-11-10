@@ -46,7 +46,7 @@ class TestMoneyEqual:
         other = Money(cents + 1)
         assert money != other
 
-    def test_when_different_object(self, money: Money) -> None:
+    def test_when_different_type(self, money: Money) -> None:
         assert money != "a"
 
 
@@ -58,3 +58,69 @@ class TestMoneyHash:
     def test_when_unequal(self, money: Money, cents: int) -> None:
         other = Money(cents + 1)
         assert hash(money) != hash(other)
+
+
+class TestMoneyInequalities:
+    def test_lt_when_less_than(self, money: Money, cents: int) -> None:
+        other = Money(cents + 1)
+        assert money < other
+
+    def test_lt_when_equal(self, money: Money, cents: int) -> None:
+        other = Money(cents)
+        assert not money < other
+
+    def test_lt_when_greater_than(self, money: Money, cents: int) -> None:
+        other = Money(cents - 1)
+        assert not money < other
+
+    def test_lt_when_different_type(self, money: Money) -> None:
+        with pytest.raises(TypeError):
+            money < "a"
+
+    def test_le_when_less_than(self, money: Money, cents: int) -> None:
+        other = Money(cents + 1)
+        assert money <= other
+
+    def test_le_when_equal(self, money: Money, cents: int) -> None:
+        other = Money(cents)
+        assert money <= other
+
+    def test_le_when_greater_than(self, money: Money, cents: int) -> None:
+        other = Money(cents - 1)
+        assert not money <= other
+
+    def test_le_when_different_type(self, money: Money) -> None:
+        with pytest.raises(TypeError):
+            money <= "a"
+
+    def test_gt_when_less_than(self, money: Money, cents: int) -> None:
+        other = Money(cents + 1)
+        assert not money > other
+
+    def test_gt_when_equal(self, money: Money, cents: int) -> None:
+        other = Money(cents)
+        assert not money > other
+
+    def test_gt_when_greater_than(self, money: Money, cents: int) -> None:
+        other = Money(cents - 1)
+        assert money > other
+
+    def test_gt_when_different_type(self, money: Money) -> None:
+        with pytest.raises(TypeError):
+            money > "a"
+
+    def test_ge_when_less_than(self, money: Money, cents: int) -> None:
+        other = Money(cents + 1)
+        assert not money >= other
+
+    def test_ge_when_equal(self, money: Money, cents: int) -> None:
+        other = Money(cents)
+        assert money >= other
+
+    def test_ge_when_greater_than(self, money: Money, cents: int) -> None:
+        other = Money(cents - 1)
+        assert money >= other
+
+    def test_ge_when_different_type(self, money: Money) -> None:
+        with pytest.raises(TypeError):
+            money >= "a"
